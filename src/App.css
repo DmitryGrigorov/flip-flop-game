@@ -1,0 +1,397 @@
+.app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: max(16px, env(safe-area-inset-top)) 20px max(16px, env(safe-area-inset-bottom));
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.header__spacer {
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.header__title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(90deg, #ffd166, #f9709c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.header__subtitle {
+  text-align: center;
+  margin-top: 4px;
+  font-size: 13px;
+  color: rgba(244, 240, 255, 0.7);
+}
+
+.icon-button {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.icon-button:active {
+  transform: scale(0.94);
+}
+
+/* ---------- Stage / Coin ---------- */
+
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  width: 100%;
+  padding: 12px 0 28px;
+}
+
+.coin {
+  width: 220px;
+  height: 220px;
+  perspective: 1200px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.coin:disabled {
+  cursor: default;
+}
+
+.coin__inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.2, 0.6, 0.3, 1);
+}
+
+.coin__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 0 6px rgba(255, 255, 255, 0.18);
+}
+
+.coin__face--heads {
+  background: linear-gradient(155deg, #ffe9a8, #f9a825);
+}
+
+.coin__face--tails {
+  transform: rotateY(180deg);
+  background: linear-gradient(155deg, #ffd1e8, #f9709c);
+}
+
+.coin__ring {
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.45);
+}
+
+.coin__label {
+  position: relative;
+  font-size: clamp(16px, 6vw, 22px);
+  font-weight: 800;
+  color: #2a1044;
+  text-align: center;
+  padding: 0 20px;
+  overflow-wrap: anywhere;
+}
+
+.result {
+  min-height: 28px;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.result--idle {
+  color: rgba(244, 240, 255, 0.65);
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.result--flipping {
+  color: rgba(244, 240, 255, 0.65);
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.result--landed {
+  color: #ffd166;
+  animation: result-pop 0.3s ease;
+}
+
+@keyframes result-pop {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.button--flip {
+  width: 100%;
+  max-width: 260px;
+  padding: 14px 18px;
+  font-size: 16px;
+}
+
+/* ---------- History strip ---------- */
+
+.history {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  max-width: 320px;
+}
+
+.history__chip {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.history__chip--heads {
+  background: rgba(249, 168, 37, 0.25);
+  color: #ffd166;
+}
+
+.history__chip--tails {
+  background: rgba(249, 112, 156, 0.25);
+  color: #ff9ac4;
+}
+
+/* ---------- Stats ---------- */
+
+.stats {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: max(12px, env(safe-area-inset-bottom));
+}
+
+.stats__row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.stats__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.stats__value {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.stats__label {
+  font-size: 12px;
+  color: rgba(244, 240, 255, 0.65);
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stats__bar {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(249, 112, 156, 0.35);
+  overflow: hidden;
+}
+
+.stats__bar-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #f9a825, #ffd166);
+  transition: width 0.4s ease;
+}
+
+.stats__reset {
+  display: block;
+  margin: 12px auto 0;
+  background: none;
+  border: none;
+  color: rgba(244, 240, 255, 0.6);
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---------- Sheet (settings modal) ---------- */
+
+.sheet {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 4, 24, 0.72);
+  backdrop-filter: blur(4px);
+  padding: 20px;
+  z-index: 20;
+}
+
+.sheet__card {
+  background: linear-gradient(160deg, #3b1568, #7c1a5b);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 22px;
+  padding: 28px 24px;
+  max-width: 320px;
+  width: 100%;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.sheet h2 {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.sheet__hint {
+  font-size: 13px;
+  color: rgba(244, 240, 255, 0.7);
+  margin-bottom: 18px;
+}
+
+.sheet__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: rgba(244, 240, 255, 0.75);
+  margin-bottom: 14px;
+}
+
+.sheet__field input {
+  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f4f0ff;
+}
+
+.sheet__field input:focus {
+  outline: 2px solid #ffd166;
+  outline-offset: 1px;
+}
+
+.sheet__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+/* ---------- Buttons ---------- */
+
+.button {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button--primary {
+  background: linear-gradient(90deg, #ffd166, #f9709c);
+  color: #2a1044;
+  border: none;
+}
+
+.button--small {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+/* ---------- Install prompt ---------- */
+
+.install-prompt {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(20, 8, 40, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 13px;
+  max-width: 480px;
+  margin: 0 auto;
+  z-index: 30;
+}
+
+.install-prompt__actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}

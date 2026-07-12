@@ -1,107 +1,143 @@
-# Flip Flop 🪙
+<div align="center">
 
-Can't decide? Flip a coin. A simple heads-or-tails decision maker — tap the coin, watch it spin, get your answer. Built with React + Vite, installable as a PWA, and packaged for Android with Capacitor.
+<img src="public/pwa-192x192.png" alt="Flip Flop app icon" width="96" />
 
-## Features
+# Flip Flop
 
-- Realistic 3D coin-flip animation with a true 50/50 random outcome
-- Customizable sides — relabel "Heads"/"Tails" to any two options (e.g. "Pizza" vs "Sushi")
-- Running tally of results with a heads/tails ratio bar and recent-flip history, saved to `localStorage`
-- Installable as a Progressive Web App (offline-capable, add to home screen)
-- Android app shell via Capacitor, buildable to a `.apk`
+### Can't decide? Let the coin choose.
 
-## Getting started
+A playful decision-maker with a satisfying 3D coin flip, custom choices, and a running history of every result.
 
-### Prerequisites
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+[![PWA](https://img.shields.io/badge/PWA-installable-5A0FC8?logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
+[![Android](https://img.shields.io/badge/Android-Capacitor-3DDC84?logo=android&logoColor=white)](https://capacitorjs.com/)
 
-To run the web app, install:
+</div>
 
-- [Node.js 22](https://nodejs.org/) — the required version is recorded in `.nvmrc`
-- npm (included with Node.js)
+## One tap. One answer.
 
-Using [nvm](https://github.com/nvm-sh/nvm) is recommended:
+Flip Flop turns indecision into a quick, delightful interaction. Name the two sides anything you like, tap the coin, and get a fair 50/50 answer. Your recent flips and overall split stay visible so every decision has a history.
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="public/1.jpg" alt="Flip Flop ready to choose between Yes and No" width="300" />
+      <br />
+      <strong>Make it your decision</strong>
+      <br />Customize both sides, then tap the coin.
+    </td>
+    <td align="center" width="50%">
+      <img src="public/photo_2_2026-07-12_11-57-37.jpg" alt="Flip Flop result screen showing No" width="300" />
+      <br />
+      <strong>Get an instant answer</strong>
+      <br />See the result and flip again whenever you need.
+    </td>
+  </tr>
+</table>
+
+## Highlights
+
+- **Satisfying 3D flip** — a polished coin animation makes every choice feel tangible.
+- **Fair outcomes** — every flip has a true 50/50 chance.
+- **Your choices, your labels** — replace Heads and Tails with anything from “Pizza / Sushi” to “Go / Stay.”
+- **Decision history** — scan recent outcomes and see the running ratio at a glance.
+- **Persistent stats** — results are saved locally between sessions.
+- **Works everywhere** — use it in the browser, install it as an offline-ready PWA, or build the Android app.
+
+## Quick start
+
+### Web
+
+Requires [Node.js 22](https://nodejs.org/) and npm. The required Node version is recorded in `.nvmrc`.
 
 ```bash
 nvm install
 nvm use
 npm install
-```
-
-To build or run the Android app locally, also install:
-
-- JDK 17 or newer
-- [Android Studio](https://developer.android.com/studio), including the Android SDK
-- Android SDK Platform 36, Android SDK Build-Tools, and Platform-Tools (install them from Android Studio's SDK Manager)
-
-Set `ANDROID_HOME` to your Android SDK directory, or create `android/local.properties`:
-
-```properties
-# Default Android Studio SDK location on macOS
-sdk.dir=/Users/YOUR_USERNAME/Library/Android/sdk
-```
-
-If the SDK was installed using Homebrew's `android-commandlinetools`, its path is commonly:
-
-```properties
-sdk.dir=/opt/homebrew/share/android-commandlinetools
-```
-
-### Run in a browser
-
-```bash
-npm install
 npm run dev
 ```
 
-Open the printed local URL in your browser.
+Open the local URL printed by Vite.
 
-## Build for the web
+### Production build
 
 ```bash
-npm run build   # outputs to dist/, includes the PWA service worker + manifest
-npm run preview # serve the production build locally
+npm run build
+npm run preview
 ```
 
-Deploy the `dist/` folder to any static host (GitHub Pages, Netlify, Vercel, etc.) to make the game installable as a PWA.
+The production-ready PWA is written to `dist/`. Deploy that folder to any static host, including GitHub Pages, Netlify, or Vercel.
 
-## Android app (.apk)
+## Android app
 
-The native Android project lives in `android/` (generated with [Capacitor](https://capacitorjs.com/)) and is committed to the repo.
+The native Android project is included in `android/` and powered by [Capacitor](https://capacitorjs.com/).
 
-### Option A — Automatic build via GitHub Actions
+### Build with GitHub Actions
 
-Every push to `main` (and manual runs via the *Actions* tab → **Build Android APK** → *Run workflow*) builds a debug `.apk` and uploads it as a workflow artifact you can download and install directly — no local Android SDK required.
+Every push to `main` builds a debug APK. You can also run it manually from **Actions → Build Android APK → Run workflow** and download the generated artifact—no local Android SDK required.
 
-### Option B — Build locally
+### Build locally
 
-After installing the prerequisites above, select Node 22 and build:
+Install JDK 17 or newer and [Android Studio](https://developer.android.com/studio) with Android SDK Platform 36, Build-Tools, and Platform-Tools. Set `ANDROID_HOME`, or add your SDK path to `android/local.properties`:
+
+```properties
+sdk.dir=/path/to/your/Android/sdk
+```
+
+Then build the app:
 
 ```bash
 nvm use
 npm install
-npm run android:build   # builds web assets, syncs Capacitor, runs the Gradle debug build
+npm run android:build
 ```
 
-The APK is written to `android/app/build/outputs/apk/debug/app-debug.apk`.
+The APK is created at:
 
-To run it on a physical Android device, enable **Developer options** and **USB debugging**, connect the device, and install the APK:
+```text
+android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+Install it on a connected device with USB debugging enabled:
 
 ```bash
 adb install -r android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Alternatively, copy the APK to the device and open it there. Android may ask you to allow installation from that file manager or browser.
-
-To open the project in Android Studio instead (e.g. to build a signed release APK/AAB):
+To work in Android Studio instead:
 
 ```bash
 npm run android:open
 ```
 
-Whenever you change the web app, re-run `npm run cap:sync` before rebuilding the Android app.
+After changing the web app, run `npm run cap:sync` before rebuilding Android.
 
 ## Tech stack
 
-- React 19 + TypeScript + Vite
-- `vite-plugin-pwa` for the service worker and web manifest
-- Capacitor for the Android native wrapper
+| Layer | Technology |
+| --- | --- |
+| Interface | React 19 + TypeScript |
+| Tooling | Vite 8 |
+| Installable web app | vite-plugin-pwa |
+| Android shell | Capacitor 8 |
+| Local persistence | Web Storage API |
+
+## Useful commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Type-check and build the PWA |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run the linter |
+| `npm run cap:sync` | Build and sync web assets to Android |
+| `npm run android:build` | Create a debug APK |
+| `npm run android:open` | Open the native project in Android Studio |
+
+<div align="center">
+
+**Next time you're stuck between two choices, flip it.**
+
+</div>
